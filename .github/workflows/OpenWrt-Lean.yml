@@ -87,36 +87,18 @@ jobs:
         echo "======================="
         df -hT
         echo "======================="
-        du -h --max-depth=1 openwrt/ --exclude=build_dir --exclude=bin
-        du -h --max-depth=1 openwrt/build_dir
-        du -h --max-depth=1 openwrt/bin
 
     - name: 整理文件
+      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        mkdir -p ./artifact/firmware
-        mkdir -p ./artifact/vmware
-        mkdir -p ./artifact/package
-        mkdir -p ./artifact/buildinfo
-        rm -rf $(find openwrt/bin/targets/ -type d -name "packages")
-        cp -rf $(find openwrt/bin/packages/ -type f -name "*.ipk") ./artifact/package/
-        cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
-        cp -rf $(find openwrt/bin/targets/ -type f -name "*combined*img*") ./artifact/firmware/
-        cp -rf $(find openwrt/bin/targets/ -type f -name "*combined*vmdk*") ./artifact/vmware/
+        cd openwrt/bin/targets/*/*
+        rm -rf packages
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        echo "::set-output name=status::success"
 
     - name: 上传固件
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@main
+      if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt-firmware-Lean-${{ env.FILE_DATE }}
-        path: ./artifact/firmware/
-
-    - name: 上传插件包
-      uses: actions/upload-artifact@v2
-      with:
-        name: OpenWrt-package-Lean-${{ env.FILE_DATE }}
-        path: ./artifact/package/
-
-    - name: 上传固件信息
-      uses: actions/upload-artifact@v2
-      with:
-        name: OpenWrt-buildinfo-Lean-${{ env.FILE_DATE }}
-        path: ./artifact/buildinfo/
+        name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        path: ${{ env.FIRMWARE }}
