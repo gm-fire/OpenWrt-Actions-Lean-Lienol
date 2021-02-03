@@ -36,7 +36,7 @@ sed -i 's#option database_directory /var/lib/nlbwmon#option database_directory /
 sed -i 's@background-color: #e5effd@background-color: #f8fbfe@g' package/luci-theme-edge/htdocs/luci-static/edge/cascade.css #luci-theme-edge主题颜色微调
 sed -i 's#rgba(223, 56, 18, 0.04)#rgba(223, 56, 18, 0.02)#g' package/luci-theme-edge/htdocs/luci-static/edge/cascade.css #luci-theme-edge主题颜色微调
 
-# 创建自定义配置文件 - OpenWrt-x86-64
+# 创建自定义配置文件 - OpenWrt-xiaomi_mir3g
 
 rm -f ./.config*
 touch ./.config
@@ -76,37 +76,15 @@ touch ./.config
 
 # 编译x64固件:
 cat >> .config <<EOF
-CONFIG_TARGET_x86=y
-CONFIG_TARGET_x86_64=y
-CONFIG_TARGET_x86_64_Generic=y
-EOF
-
-# 设置固件大小:
-cat >> .config <<EOF
-CONFIG_TARGET_KERNEL_PARTSIZE=16
-CONFIG_TARGET_ROOTFS_PARTSIZE=160
-EOF
-
-# 固件压缩:
-cat >> .config <<EOF
-CONFIG_TARGET_IMAGES_GZIP=y
-EOF
-
-# 编译UEFI固件:
-cat >> .config <<EOF
-CONFIG_EFI_IMAGES=y
+CONFIG_TARGET_ramips=y
+CONFIG_TARGET_ramips_mt7621=y
+CONFIG_TARGET_ramips_mt7621_DEVICE_xiaomi_mir3g=y
 EOF
 
 # IPv6支持:
 cat >> .config <<EOF
 CONFIG_PACKAGE_ipv6helper=y
 CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
-EOF
-
-# 编译VMware镜像以及镜像填充
-cat >> .config <<EOF
-CONFIG_VMDK_IMAGES=y
-CONFIG_TARGET_IMAGES_PAD=y
 EOF
 
 # 多文件系统支持:
@@ -133,7 +111,7 @@ cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-oaf=y #应用过滤
 # CONFIG_PACKAGE_luci-app-openclash=y #OpenClash客户端
 # CONFIG_PACKAGE_luci-app-serverchan=y #微信推送
-CONFIG_PACKAGE_luci-app-eqos=y #IP限速
+# CONFIG_PACKAGE_luci-app-eqos=y #IP限速
 EOF
 
 # ShadowsocksR插件:
@@ -189,15 +167,15 @@ CONFIG_PACKAGE_luci-app-adbyby-plus=y #adbyby去广告
 CONFIG_PACKAGE_luci-app-webadmin=y #Web管理页面设置
 CONFIG_PACKAGE_luci-app-filetransfer=y #系统-文件传输
 CONFIG_PACKAGE_luci-app-autoreboot=y #定时重启
-CONFIG_PACKAGE_luci-app-frpc=y #Frp内网穿透
+# CONFIG_PACKAGE_luci-app-frpc=y #Frp内网穿透
 CONFIG_PACKAGE_luci-app-upnp=y #通用即插即用UPnP(端口自动转发)
 CONFIG_DEFAULT_luci-app-vlmcsd=y #KMS激活服务器
-CONFIG_PACKAGE_luci-app-ddns=y #DDNS服务
+# CONFIG_PACKAGE_luci-app-ddns=y #DDNS服务
 CONFIG_PACKAGE_luci-app-wol=y #网络唤醒
-CONFIG_PACKAGE_luci-app-control-mia=y #时间控制
-CONFIG_PACKAGE_luci-app-control-timewol=y #定时唤醒
-CONFIG_PACKAGE_luci-app-control-webrestriction=y #访问限制
-CONFIG_PACKAGE_luci-app-control-weburl=y #网址过滤
+# CONFIG_PACKAGE_luci-app-control-mia=y #时间控制
+# CONFIG_PACKAGE_luci-app-control-timewol=y #定时唤醒
+# CONFIG_PACKAGE_luci-app-control-webrestriction=y #访问限制
+# CONFIG_PACKAGE_luci-app-control-weburl=y #网址过滤
 CONFIG_PACKAGE_luci-app-nlbwmon=y #宽带流量监控
 CONFIG_PACKAGE_luci-app-wrtbwmon=y #实时流量监测
 CONFIG_PACKAGE_luci-app-sfe=y #高通开源的 Shortcut FE 转发加速引擎
@@ -215,8 +193,6 @@ CONFIG_PACKAGE_luci-app-sfe=y #高通开源的 Shortcut FE 转发加速引擎
 # CONFIG_PACKAGE_luci-app-hd-idle is not set #磁盘休眠
 # CONFIG_PACKAGE_luci-app-zerotier is not set #Zerotier内网穿透
 # CONFIG_PACKAGE_luci-app-sqm is not set #SQM智能队列管理
-#
-# passwall相关(禁用):
 #
 #
 # VPN相关插件(禁用):
