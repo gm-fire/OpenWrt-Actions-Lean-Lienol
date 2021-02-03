@@ -7,40 +7,29 @@
 #
 
 
-name: OpenWrt-x86-64-Lienol
+name: OpenWrt-Lienol
 
 on:
-# 定时触发(每天早5点)
-#  schedule:
-#    - cron: 0 21 * * *
-
-# release触发
-  release:
-    types: [published]
-
-# 点赞触发
-#  watch:
-#    types: [started]
-
-# 编辑触发
-#  push:
-#    branches: 
-#      - master
-
-# config触发
-#  paths:
-#    - 'x86_64.config'
-
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH远程'
+        required: false
+        default: 'ssh-actions'
+      release:
+        description: '发布固件'
+        required: false
+        default: 'release-actions'
 
 env:
   REPO_URL: https://github.com/Lienol/openwrt
   REPO_BRANCH: 19.07
-  DIY_SH: OpenWrt-x86-64-Lienol.sh
+  DIY_SH: OpenWrt-Lienol.sh
   TZ: Asia/Shanghai
 
 jobs:
   build_openwrt:
-    name: OpenWrt-x86-64-Lienol
+    name: OpenWrt-Lienol
     if: github.event.repository.owner.id == github.event.sender.id
     runs-on: ubuntu-latest
 
@@ -140,17 +129,5 @@ jobs:
       with:
         name: OpenWrt-buildinfo-Lienol-${{ env.FILE_DATE }}
         path: ./artifact/buildinfo/
-
-    - name: 上传固件到奶牛快传
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ./artifact/firmware/ 2>&1 | tee cowtransfer.log
-        echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
-
-    - name: 上传固件到 WeTransfer
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress ./artifact/firmware/ 2>&1 | tee wetransfer.log
-        echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
 
 
