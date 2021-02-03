@@ -12,7 +12,7 @@ cat feeds.conf.default
 # 添加第三方软件包
 git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
 git clone https://github.com/destan19/OpenAppFilter package/OpenAppFilter
-git clone https://github.com/tty228/luci-app-serverchan package/luci-app-serverchan
+# git clone https://github.com/tty228/luci-app-serverchan package/luci-app-serverchan
 git clone https://github.com/garypang13/luci-theme-edge package/luci-theme-edge -b 18.06
 
 # 更新并安装源
