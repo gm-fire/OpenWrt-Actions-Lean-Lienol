@@ -66,6 +66,7 @@ jobs:
         make defconfig
 
     - name: 下载软件包
+      id: package
       run: |
         cd openwrt && make download -j8
         find dl -size -1024c -exec ls -l {} \;
@@ -99,3 +100,9 @@ jobs:
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
+        
+    - name: 删除工作流运行
+      uses: GitRML/delete-workflow-runs@main
+      with:
+        retain_days: 1
+        keep_minimum_runs: 3
