@@ -10,8 +10,8 @@ sed -i 's#src-git luci https://github.com/Lienol/openwrt-luci.git;17.01#src-git 
 cat feeds.conf.default
 
 # 添加第三方软件包
-git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
-git clone https://github.com/destan19/OpenAppFilter package/OpenAppFilter
+# git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
+# git clone https://github.com/destan19/OpenAppFilter package/OpenAppFilter
 # git clone https://github.com/tty228/luci-app-serverchan package/luci-app-serverchan
 git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-theme-edge
 
@@ -20,12 +20,11 @@ git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-th
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
 # 替换更新passwall和ssrplus+
-rm -rf package/openwrt-packages/luci-app-passwall && git clone https://github.com/xiaorouji/openwrt-passwall/tree/main/luci-app-passwall package/openwrt-packages/luci-app-passwall
+rm -rf package/openwrt-packages/luci-app-passwall && git clone https://github.com/xiaorouji/openwrt-passwall/luci-app-passwall package/openwrt-packages/luci-app-passwall
 rm -rf package/openwrt-packages/luci-app-ssr-plus && git clone https://github.com/fw876/helloworld package/openwrt-packages/helloworld
 
 # 为19.07添加libcap-bin依赖
-rm -rf feeds/packages/libs/libcap
-git clone https://github.com/openwrt/packages/tree/openwrt-19.07/libs/libcap feeds/packages/libs/libcap
+rm -rf feeds/packages/libs/libcap && git clone -b openwrt-19.07 https://github.com/openwrt/packages/libs/libcap feeds/packages/libs/libcap
 
 # 自定义定制选项
 sed -i 's#192.168.1.1#10.0.0.1#g' package/base-files/files/bin/config_generate #定制默认IP
