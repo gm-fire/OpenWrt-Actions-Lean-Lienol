@@ -9,8 +9,8 @@
 cat feeds.conf.default
 
 # 添加第三方软件包
-git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
-git clone https://github.com/destan19/OpenAppFilter package/OpenAppFilter
+# git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
+# git clone https://github.com/destan19/OpenAppFilter package/OpenAppFilter
 # git clone https://github.com/tty228/luci-app-serverchan package/luci-app-serverchan
 # git clone https://github.com/pymumu/luci-app-smartdns package/luci-app-smartdns
 git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-theme-edge
@@ -81,7 +81,7 @@ touch ./.config
 # 无论你想要对固件进行怎样的定制, 都需要且只需要修改 EOF 回环内的内容.
 # 
 
-# 编译x64固件:
+# 编译固件:
 cat >> .config <<EOF
 CONFIG_TARGET_ramips=y
 CONFIG_TARGET_ramips_mt7621=y
