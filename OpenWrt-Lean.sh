@@ -5,11 +5,12 @@
 # sudo -E apt-get -y install rename
 
 # 更新feeds文件
-# sed -i 's@#src-git helloworld@src-git helloworld@g' feeds.conf.default #启用helloworld
+# sed -i 's@#src-git helloworld@src-git helloworld@g' feeds.conf.default # 启用helloworld
 cat feeds.conf.default
 
 # 添加第三方软件包
-# git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
+git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
+git clone https://github.com/kenzok8/small package/small # passwall依赖库
 # git clone https://github.com/destan19/OpenAppFilter package/OpenAppFilter
 # git clone https://github.com/tty228/luci-app-serverchan package/luci-app-serverchan
 # git clone https://github.com/pymumu/luci-app-smartdns package/luci-app-smartdns
@@ -21,16 +22,6 @@ git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-th
 
 # 替换更新默认argon主题
 rm -rf package/lean/luci-theme-argon && git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
-
-# 替换更新passwall和ssrplus+
-rm -rf package/openwrt-packages/luci-app-passwall && git clone https://github.com/xiaorouji/openwrt-passwall/luci-app-passwall package/openwrt-packages/luci-app-passwall
-rm -rf package/openwrt-packages/luci-app-ssr-plus && git clone https://github.com/fw876/helloworld package/openwrt-packages/helloworld
-
-# 添加passwall依赖库
-git clone https://github.com/kenzok8/small package/small
-
-# 替换更新haproxy默认版本
-rm -rf feeds/packages/net/haproxy && git clone -b 19.07 https://github.com/Lienol/openwrt-packages/net/haproxy feeds/packages/net/haproxy
 
 # 替换https-dns-proxy.init文件,解决用LEDE源码加入passwall编译固件后DNS转发127.0.0.1#5053和12.0.0.1#5054问题
 curl -fsSL  https://raw.githubusercontent.com/Lienol/openwrt-packages/19.07/net/https-dns-proxy/files/https-dns-proxy.init > feeds/packages/net/https-dns-proxy/files/https-dns-proxy.init
