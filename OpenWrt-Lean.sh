@@ -13,24 +13,24 @@ git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
 git clone https://github.com/destan19/OpenAppFilter package/OpenAppFilter
 # git clone https://github.com/tty228/luci-app-serverchan package/luci-app-serverchan
 # git clone https://github.com/pymumu/luci-app-smartdns package/luci-app-smartdns
-git clone https://github.com/garypang13/luci-theme-edge package/luci-theme-edge -b 18.06
+git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-theme-edge
 
 # 更新并安装源
 ./scripts/feeds clean
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
 # 替换更新默认argon主题
-rm -rf package/lean/luci-theme-argon && git clone https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon -b 18.06
+rm -rf package/lean/luci-theme-argon && git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 
 # 替换更新passwall和ssrplus+
-rm -rf package/openwrt-packages/luci-app-passwall && svn co https://github.com/xiaorouji/openwrt-passwall/tree/main/luci-app-passwall package/openwrt-packages/luci-app-passwall
-rm -rf package/openwrt-packages/luci-app-ssr-plus && svn co https://github.com/fw876/helloworld package/openwrt-packages/helloworld
+rm -rf package/openwrt-packages/luci-app-passwall && git clone https://github.com/xiaorouji/openwrt-passwall/tree/main/luci-app-passwall package/openwrt-packages/luci-app-passwall
+rm -rf package/openwrt-packages/luci-app-ssr-plus && git clone https://github.com/fw876/helloworld package/openwrt-packages/helloworld
 
 # 添加passwall依赖库
 git clone https://github.com/kenzok8/small package/small
 
 # 替换更新haproxy默认版本
-rm -rf feeds/packages/net/haproxy && svn co https://github.com/Lienol/openwrt-packages/tree/19.07/net/haproxy feeds/packages/net/haproxy
+rm -rf feeds/packages/net/haproxy && git clone https://github.com/Lienol/openwrt-packages/tree/19.07/net/haproxy feeds/packages/net/haproxy
 
 # 替换https-dns-proxy.init文件,解决用LEDE源码加入passwall编译固件后DNS转发127.0.0.1#5053和12.0.0.1#5054问题
 curl -fsSL  https://raw.githubusercontent.com/Lienol/openwrt-packages/19.07/net/https-dns-proxy/files/https-dns-proxy.init > feeds/packages/net/https-dns-proxy/files/https-dns-proxy.init
