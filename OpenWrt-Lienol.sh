@@ -6,12 +6,10 @@
 
 # 更新feeds文件
 # sed -i 's#diy1 https://github.com/xiaorouji/openwrt-package#diy1 https://github.com/db-one/Lienol-openwrt-package#g' feeds.conf.default #更换默认包源
-# sed -i 's#src-git luci https://github.com/Lienol/openwrt-luci.git;17.01#src-git luci https://github.com/Lienol/openwrt-luci.git;18.06#g' feeds.conf.default #更换luci版本
-sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default #更换默认包源
 cat feeds.conf.default
 
 # 添加第三方软件包
-# git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
+git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
 # git clone https://github.com/destan19/OpenAppFilter package/OpenAppFilter
 # git clone https://github.com/tty228/luci-app-serverchan package/luci-app-serverchan
 git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-theme-edge
@@ -19,6 +17,9 @@ git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-th
 # 更新并安装源
 ./scripts/feeds clean
 ./scripts/feeds update -a && ./scripts/feeds install -a
+
+# 替换更新默认argon主题
+rm -rf package/lean/luci-theme-argon && git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 
 # 自定义定制选项
 sed -i 's#192.168.1.1#10.0.0.1#g' package/base-files/files/bin/config_generate #定制默认IP
