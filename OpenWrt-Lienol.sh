@@ -7,12 +7,11 @@
 # 更新feeds文件
 # sed -i 's#diy1 https://github.com/xiaorouji/openwrt-package#diy1 https://github.com/db-one/Lienol-openwrt-package#g' feeds.conf.default #更换默认包源
 sed -i 's#src-git luci https://github.com/Lienol/openwrt-luci.git;17.01#src-git luci https://github.com/Lienol/openwrt-luci.git;18.06#g' feeds.conf.default #更换luci版本
+sed -i '$a src-git kenzok8 https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+sed -i '$a src-git kenzok8-small https://github.com/kenzok8/small' feeds.conf.default
 cat feeds.conf.default
 
 # 添加第三方软件包
-git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
-git clone https://github.com/jerrykuku/lua-maxminddb.git package/lua-maxminddb
-git clone https://github.com/jerrykuku/luci-app-vssr.git package/luci-app-vssr
 git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-theme-edge
 
 # 更新并安装源
@@ -22,9 +21,11 @@ git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-th
 # 替换更新默认argon主题
 rm -rf package/lean/luci-theme-argon && git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 
-# 替换更新passwall和ssrplus+	# 替换更新passwall和ssrplus+
-rm -rf package/openwrt-packages/luci-app-passwall && svn co https://github.com/xiaorouji/openwrt-package/trunk/lienol/luci-app-passwall package/openwrt-packages/luci-app-passwall	rm -rf package/openwrt-packages/luci-app-passwall && svn co https://github.com/xiaorouji/openwrt-passwall/tree/main/luci-app-passwall package/openwrt-packages/luci-app-passwall
-rm -rf package/openwrt-packages/luci-app-ssr-plus && svn co https://github.com/fw876/helloworld package/openwrt-packages/helloworld	rm -rf package/openwrt-packages/luci-app-ssr-plus && svn co https://github.com/fw876/helloworld package/openwrt-packages/helloworld
+# 替换更新passwall和ssrplus+	# 替换更新passwall和ssrplus+	
+rm -rf package/openwrt-packages/luci-app-passwall && svn co https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall package/openwrt-packages/luci-app-passwall
+rm -rf package/openwrt-packages/luci-app-ssr-plus && svn co https://github.com/fw876/helloworld package/openwrt-packages/helloworld
+rm -rf package/openwrt-packages/lua-maxminddb && svn co https://github.com/jerrykuku/lua-maxminddb.git package/openwrt-packages/lua-maxminddb
+rm -rf package/openwrt-packages/luci-app-vssr && svn co https://github.com/jerrykuku/luci-app-vssr.git package/openwrt-packages/luci-app-vssr
 
 # 为19.07添加libcap-bin依赖
 rm -rf feeds/packages/libs/libcap && svn co https://github.com/openwrt/packages/trunk/libs/libcap feeds/packages/libs/libcap
