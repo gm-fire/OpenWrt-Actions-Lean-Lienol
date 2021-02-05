@@ -11,10 +11,9 @@ cat feeds.conf.default
 
 # 添加第三方软件包
 git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
-git clone https://github.com/kenzok8/small package/small
 git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-theme-edge
-git clone https://github.com/jerrykuku/lua-maxminddb package/lua-maxminddb
-git clone https://github.com/jerrykuku/luci-app-vssr package/luci-app-vssr
+#git clone https://github.com/jerrykuku/lua-maxminddb package/lua-maxminddb
+#git clone https://github.com/jerrykuku/luci-app-vssr package/openwrt-packages/luci-app-vssr
 
 # 更新并安装源
 ./scripts/feeds clean
