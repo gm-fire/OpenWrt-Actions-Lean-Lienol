@@ -28,7 +28,7 @@ rm -rf package/lean/luci-theme-argon && git clone -b 18.06 https://github.com/je
 # rm -rf package/openwrt-packages/luci-app-ssr-plus && svn co https://github.com/fw876/helloworld package/openwrt-packages/helloworld
 
 # 为19.07添加libcap-bin依赖
-rm -rf feeds/packages/libs/libcap && svn co https://github.com/openwrt/packages/openwrt-19.07/libs/libcap feeds/packages/libs/libcap
+rm -rf feeds/packages/libs/libcap && svn co https://github.com/openwrt/packages/branches/openwrt-19.07/libs/libcap feeds/packages/libs/libcap
 
 # 自定义定制选项
 sed -i 's#192.168.1.1#10.0.0.1#g' package/base-files/files/bin/config_generate #定制默认IP
