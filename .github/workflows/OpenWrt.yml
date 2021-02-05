@@ -15,7 +15,7 @@ on:
 env:
   REPO_URL: https://github.com/project-openwrt/openwrt
   REPO_BRANCH: openwrt-18.06-k5.4
-  DIY_SH: OpenWrt-Lean.sh
+  DIY_SH: OpenWrt.sh
   TZ: Asia/Shanghai
 
 jobs:
