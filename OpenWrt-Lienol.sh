@@ -18,7 +18,8 @@ git clone https://github.com/jerrykuku/luci-app-vssr package/luci-app-vssr
 
 # 更新并安装源
 ./scripts/feeds clean
-./scripts/feeds update -a && ./scripts/feeds install -a
+./scripts/feeds update -a
+./scripts/feeds install -a
 
 # 替换更新默认argon主题
 rm -rf package/lean/luci-theme-argon && git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
