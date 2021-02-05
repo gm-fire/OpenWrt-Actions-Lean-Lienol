@@ -9,6 +9,8 @@
 sed -i 's#src-git luci https://github.com/Lienol/openwrt-luci.git;17.01#src-git luci https://github.com/Lienol/openwrt-luci.git;18.06#g' feeds.conf.default #更换luci版本
 sed -i '$a src-git kenzok8 https://github.com/kenzok8/openwrt-packages;master' feeds.conf.default
 sed -i '$a src-git kenzok8-small https://github.com/kenzok8/small;master' feeds.conf.default
+sed -i '$a src-git maxminddb https://github.com/jerrykuku/lua-maxminddb;master' feeds.conf.default
+sed -i '$a src-git vssr https://github.com/jerrykuku/luci-app-vssr;master' feeds.conf.default
 cat feeds.conf.default
 
 # 添加第三方软件包
@@ -20,10 +22,6 @@ git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-th
 
 # 替换更新默认argon主题
 rm -rf package/lean/luci-theme-argon && git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
-
-# 替换更新maxminddb和vssr
-rm -rf package/lua-maxminddb && svn co https://github.com/jerrykuku/trunk/lua-maxminddb package/lua-maxminddb
-rm -rf package/luci-app-vssr && svn co https://github.com/jerrykuku/trunk/luci-app-vssr package/luci-app-vssr
 
 # 为19.07添加libcap-bin依赖
 rm -rf feeds/packages/libs/libcap && svn co https://github.com/openwrt/packages/trunk/libs/libcap feeds/packages/libs/libcap
