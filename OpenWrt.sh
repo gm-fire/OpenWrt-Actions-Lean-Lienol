@@ -5,10 +5,11 @@
 # sudo -E apt-get -y install rename
 
 # 更新feeds文件
+sed -i '$a src-git kenzok8 https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+sed -i '$a src-git kenzok8-small https://github.com/kenzok8/small' feeds.conf.default
 cat feeds.conf.default
 
 # 添加第三方软件包
-git clone https://github.com/kenzok8/openwrt-packages package/openwrt-packages
 git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-theme-edge
 
 # 更新并安装源
