@@ -23,7 +23,7 @@ git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-th
 # 替换更新默认argon主题
 rm -rf package/lean/luci-theme-argon && git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 
-# 替换https-dns-proxy.init文件,解决用LEDE源码加入passwall编译固件后DNS转发127.0.0.1#5053和12.0.0.1#5054问题
+# 替换https-dns-proxy.init文件,解决编译固件后DNS转发127.0.0.1#5053和12.0.0.1#5054问题
 curl -fsSL  https://raw.githubusercontent.com/Lienol/openwrt-packages/19.07/net/https-dns-proxy/files/https-dns-proxy.init > feeds/packages/net/https-dns-proxy/files/https-dns-proxy.init
 
 # 自定义定制选项
