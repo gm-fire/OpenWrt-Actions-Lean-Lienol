@@ -22,9 +22,6 @@ git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-th
 # 替换更新默认argon主题
 rm -rf package/lean/luci-theme-argon && git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 
-# 为19.07添加libcap-bin依赖
-# rm -rf feeds/packages/libs/libcap && svn co https://github.com/openwrt/packages/branches/openwrt-19.07/libs/libcap feeds/packages/libs/libcap
-
 # 自定义定制选项
 sed -i 's#192.168.1.1#10.0.0.1#g' package/base-files/files/bin/config_generate #定制默认IP
 sed -i 's#max-width:200px#max-width:1000px#g' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm #修改首页样式
