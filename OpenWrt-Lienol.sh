@@ -26,8 +26,8 @@ git clone -b 18.06 https://github.com/garypang13/luci-theme-edge package/luci-th
 rm -rf package/lean/luci-theme-argon && git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 
 # 替换更新passwall和ssrplus+	
-rm -rf package/openwrt-packages/luci-app-passwall && svn co https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall package/openwrt-packages/luci-app-passwall	
-rm -rf package/openwrt-packages/luci-app-ssr-plus && svn co https://github.com/fw876/helloworld package/openwrt-packages/helloworld
+# rm -rf package/openwrt-packages/luci-app-passwall && svn co https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall package/openwrt-packages/luci-app-passwall	
+# rm -rf package/openwrt-packages/luci-app-ssr-plus && svn co https://github.com/fw876/helloworld package/openwrt-packages/helloworld
 
 # 为19.07添加libcap-bin依赖
 rm -rf feeds/packages/libs/libcap && svn co https://github.com/openwrt/packages/branches/openwrt-19.07/libs/libcap feeds/packages/libs/libcap
